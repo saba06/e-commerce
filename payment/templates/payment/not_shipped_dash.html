@@ -1,0 +1,47 @@
+{% extends "storefront/base.html" %}
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Unshipped Orders</h1>
+        </div>
+    </div>
+</header>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Order</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Date Ordered</th>
+                        <th scope="col">shipped</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in orders %}
+                    <tr>
+                        <td><a href="{% url 'orders' item.id %}">{{ item.id }}</a></td>
+                        <td>${{ item.amount_paid}}</td>
+                        <td>{{  item.email }}o</td>
+                        <td>{{  item.date_ordered }}o</td>
+                        <td>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <input type="hidden" name="shipping_status" value="true">
+                                <input type="hidden" name="num" value="{{ item.id }}">
+                                <button type="submit" class="btn btn-success">Mark as Shipped</button>
+                            </form>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<br /><br />
+{% endblock %}
