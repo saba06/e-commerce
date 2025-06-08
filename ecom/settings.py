@@ -87,6 +87,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
+        'USER': os.getenv('PGUSER'),
         'NAME': os.getenv('PGDATABASE'),
         'HOST': os.getenv('PGHOST'),
         'PASSWORD': os.getenv('PGPASSWORD'),
